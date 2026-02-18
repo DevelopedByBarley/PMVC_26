@@ -8,6 +8,7 @@ $router->getNativeRouter()->aliasMiddleware(
 );
 
 $router->get('/', [App\Http\HomeController::class, 'index']);
+$router->post('/test', [App\Http\HomeController::class, 'store']);
 require __DIR__ . '/posts.php';
 
 $router->run();

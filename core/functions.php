@@ -98,6 +98,52 @@ if (!function_exists('router')) {
     }
 }
 
+if (!function_exists('app')) {
+    function app(?string $key = null): mixed
+    {
+        static $app = null;
+
+        if ($app === null) {
+            $app = require base_path('bootstrap/app.php');
+        }
+
+        if ($key === null) {
+            return $app;
+        }
+
+        return $app[$key] ?? null;
+    }
+}
+
+if (!function_exists('validator')) {
+    function validator(): \Illuminate\Validation\Factory
+    {
+        $validator = app('validator');
+        if (!$validator instanceof \Illuminate\Validation\Factory) {
+            throw new \RuntimeException('Validator service is not available.');
+        }
+
+        return $validator;
+    }
+}
+
+if (!function_exists('old')) {
+    function old(string $key, mixed $default = ''): mixed
+    {
+        if (isset($GLOBALS['old']) && is_array($GLOBALS['old']) && array_key_exists($key, $GLOBALS['old'])) {
+            return $GLOBALS['old'][$key];
+        }
+
+        if (isset($_SESSION['old']) && is_array($_SESSION['old']) && array_key_exists($key, $_SESSION['old'])) {
+            return $_SESSION['old'][$key];
+        }
+
+        return $default;
+    }
+}
+
+
+
 if (!function_exists('db')) {
     function db(): \Illuminate\Database\Capsule\Manager
     {
@@ -105,3 +151,30 @@ if (!function_exists('db')) {
     }
 }
 
+if (!function_exists('oldValue')) {
+
+    function oldValue($key, $default = '')
+    {
+        $old = Core\Session::get('old', []);
+        if (!is_array($old)) {
+            return $default;
+        }
+        return array_key_exists($key, $old) ? $old[$key] : $default;
+    }
+}
+
+
+if (!function_exists('errors')) {
+    function errors(string $key, array $errors = []): void
+    {
+        if (empty($errors[$key])) {
+            return;
+        }
+
+        foreach ((array) $errors[$key] as $message) {
+            echo '<div class="text-danger small mt-1">'
+                . htmlspecialchars($message, ENT_QUOTES, 'UTF-8')
+                . '</div>';
+        }
+    }
+}

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\User;
 use Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -11,20 +12,21 @@ return new class implements Migration
     {
         $schema = db()->getConnection()->getSchemaBuilder();
 
-        if ($schema->hasTable('posts')) {
+        if ($schema->hasTable('users')) {
             return;
         }
 
-        $schema->create('posts', function (Blueprint $table): void {
+        $schema->create('users', function (Blueprint $table): void {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->text('body');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        db()->getConnection()->getSchemaBuilder()->dropIfExists('posts');
+        db()->getConnection()->getSchemaBuilder()->dropIfExists('users');
     }
 };

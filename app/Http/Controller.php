@@ -19,6 +19,11 @@ abstract class Controller
         return new Response($content, $status, $headers);
     }
 
+    protected function redirect(string $url, int $status = 302, array $headers = []): Response
+    {
+        return new Response('', $status, array_merge($headers, ['Location' => $url]));
+    }
+
     protected function view(string $view, array $data = [], ?string $layout = 'layouts.layout-view'): Response
     {
         $viewPath = $this->resolveViewPath($view);

@@ -72,4 +72,31 @@
             </div>
         </div>
     </section>
+    <section class="card border-0 shadow-sm t-rounded-xl t-mt-1">
+        <div class="card-body">
+            <h2 class="h5 t-font-semibold t-mb-3">Quick Submit (Validator Demo)</h2>
+            <form method="POST" action="/test" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label t-font-semibold" for="name">Name</label>
+                    <input class="form-control" id="name" name="name" type="text" value="<?= htmlspecialchars(oldValue('name', ''), ENT_QUOTES, 'UTF-8') ?>" placeholder="John Doe" required>
+                    <?php errors('name', $errors ?? []); ?>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label t-font-semibold" for="email">Email</label>
+                    <input class="form-control" id="email" name="email" type="email" value="<?= htmlspecialchars(oldValue('email', ''), ENT_QUOTES, 'UTF-8') ?>" placeholder="john@example.com" required>
+                    <?php errors('email', $errors ?? []); ?>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label t-font-semibold" for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" placeholder="********" required>
+                    <?php errors('password', $errors ?? []); ?>
+                </div>
+                <div class="col-12">
+                    <button class="btn t-bg-emerald-500 t-text-white t-border-0 t-px-5 t-py-2 t-rounded-lg t-font-semibold" type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
 </div>

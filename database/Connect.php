@@ -16,18 +16,16 @@ class Connect
             return self::$capsule;
         }
 
+        $default = (string) config('db.default', 'mysql');
+        $connection = config("db.connections.{$default}", []);
+        if (!is_array($connection) || $connection === []) {
+            throw new \RuntimeException("Database config for connection '{$default}' is missing.");
+        }
+
         $capsule = new Capsule();
-        $capsule->addConnection([
-            'driver' => self::env('DB_CONNECTION', 'mysql'),
-            'host' => self::env('DB_HOST', '127.0.0.1'),
-            'port' => (int) self::env('DB_PORT', '3306'),
-            'database' => self::env('DB_DATABASE', ''),
-            'username' => self::env('DB_USERNAME', 'root'),
-            'password' => self::env('DB_PASSWORD', ''),
-            'charset' => self::env('DB_CHARSET', 'utf8mb4'),
-            'collation' => self::env('DB_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => self::env('DB_PREFIX', ''),
-        ]);
+        // Keep Laravel/Eloquent default connection name available as "default".
+        $capsule->addConnection($connection, 'default');
+        $capsule->getDatabaseManager()->setDefaultConnection('default');
 
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
@@ -40,19 +38,5 @@ class Connect
     public static function capsule(): Capsule
     {
         return self::boot();
-    }
-
-    private static function env(string $key, ?string $default = null): ?string
-    {
-        if (array_key_exists($key, $_ENV)) {
-            return (string) $_ENV[$key];
-        }
-
-        $value = getenv($key);
-        if ($value !== false) {
-            return (string) $value;
-        }
-
-        return $default;
     }
 }

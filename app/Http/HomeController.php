@@ -9,6 +9,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        return $this->response('Welcome to the Home Page!');
+        return $this->view('pages.home', [
+            'title' => 'PMVC Home',
+            'heading' => 'Welcome Home',
+            'message' => 'This page is rendered from HomeController using view.php files and layouts folder.',
+        ]);
     }
 }

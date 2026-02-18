@@ -17,7 +17,11 @@ class PostController extends Controller
 
     public function show(string $id)
     {
-        $post = Post::query()->findOrFail($id);
+        $post = Post::query()->find($id);
+
+        if ($post === null) {
+            return $this->json(['message' => 'Post not found'], 404);
+        }
 
         return $this->json([
             'data' => $post->toArray(),

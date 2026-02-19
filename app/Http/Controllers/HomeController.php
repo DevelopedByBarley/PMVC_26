@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Http;
+namespace App\Http\Controllers;
 
 use App\Models\User;
+use Core\Log;
 use Core\Session;
 use Core\ValidationException;
 
@@ -50,8 +51,8 @@ class HomeController extends Controller
                 ->deletePrevImages($route, ['2546526946996ecc0f14916.38738549.png']) // Itt megadhatod a törlendő képek nevét tömbben, pl: ['old_image1.jpg', 'old_image2.png']
                 ->save($route);
 
-        
-            dd($fileName);
+
+            Log::info("New user created: {$data['email']} with uploaded file: {$fileName}");
             User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],

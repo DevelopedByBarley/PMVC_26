@@ -8,16 +8,12 @@ class AdminSeeder
 {
     public function run(): void
     {
-        $user = db()::table('users')->select('id')->first();
-        if ($user === null) {
-            throw new \RuntimeException('No users found. Create at least one user before seeding admins.');
-        }
 
         db()::table('admins')->delete();
 
         db()::table('admins')->insert([
             [
-                'id' => "asd123ras",
+                'id' => "1",
                 'level' => 1,
                 'name' => 'Szaniszló Árpád',
                 'email' => 'arpadsz@max.hu',

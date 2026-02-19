@@ -178,3 +178,16 @@ if (!function_exists('errors')) {
         }
     }
 }
+
+if (!function_exists('checkAuth')) {
+    function checkAuth(string $entity): bool
+    {
+        // Check if session exist
+
+        if (!isset($_SESSION)) {
+            return false;
+        }
+
+        return isset($_SESSION[$entity . '_id']);
+    }
+}

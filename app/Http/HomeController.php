@@ -43,6 +43,15 @@ class HomeController extends Controller
                 );
             }
 
+            $route = '/storage/uploads/images';
+            $fileName = $this->storage
+                ->setWhiteList(['image/jpeg', 'image/png', 'image/gif'])
+                ->file($_FILES['file'] ?? null)
+                ->deletePrevImages($route, ['2546526946996ecc0f14916.38738549.png']) // Itt megadhatod a törlendő képek nevét tömbben, pl: ['old_image1.jpg', 'old_image2.png']
+                ->save($route);
+
+        
+            dd($fileName);
             User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],

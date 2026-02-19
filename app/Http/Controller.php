@@ -5,11 +5,19 @@ declare(strict_types=1);
 namespace App\Http;
 
 use Core\Session;
+use Core\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 abstract class Controller
 {
+    protected  $storage;
+
+    public function __construct()
+    {
+        // You can put common logic for all controllers here, like middleware handling, etc.
+        $this->storage = new Storage();
+    }
 
     protected function json(array $data, int $status = 200, array $headers = []): JsonResponse
     {

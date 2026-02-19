@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Core\Log;
 use Core\Session;
 
 error_reporting(E_ALL);
@@ -12,9 +13,7 @@ const BASE_PATH = __DIR__ . '/../';
 require BASE_PATH . 'vendor/autoload.php';
 require BASE_PATH . 'core/functions.php';
 
-$app = require BASE_PATH . 'bootstrap/app.php';
-$logger = $app['logger'];
-$logger->info('Request received', [
+Log::info('Request received', [
     'uri' => $_SERVER['REQUEST_URI'] ?? '/',
     'app_name' => $_ENV['APP_NAME'] ?? 'PMVC_26',
 ]);

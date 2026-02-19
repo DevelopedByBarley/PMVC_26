@@ -9,6 +9,19 @@ export function initUi() {
     const now = new Date();
     const stamp = now.toLocaleTimeString();
     console.info(`[ui] initialized at ${stamp}`);
+
+    initToasts();
+}
+
+export function initToasts() {
+    if (typeof window === 'undefined' || !window.bootstrap || !window.bootstrap.Toast) {
+        return;
+    }
+
+    document.querySelectorAll('.toast.show').forEach((element) => {
+        const toast = window.bootstrap.Toast.getOrCreateInstance(element);
+        toast.show();
+    });
 }
 
 export function onReady(callback) {

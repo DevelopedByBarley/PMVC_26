@@ -43,8 +43,6 @@ class HomeController extends Controller
                 );
             }
 
-        
-
             User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -52,11 +50,12 @@ class HomeController extends Controller
             ]);
 
             Session::flash('success', 'Sikeres beküldés.');
-            return $this->redirect('/');
+
+            return $this->toast('success', 'Sikeres beküldés.')->redirect('/');
         } catch (ValidationException $e) {
             Session::flash('errors', $e->errors);
             Session::flash('old', $e->old);
-            return $this->response('', 302, ['Location' => '/']);
+            return $this->alert('error', 'Hiba történt a beküldés során.')->response('', 302, ['Location' => '/']);
         }
 
 

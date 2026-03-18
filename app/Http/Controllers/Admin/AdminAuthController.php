@@ -68,6 +68,6 @@ class AdminAuthController extends Controller
   public function logout()
   {
     Session::unset('admin_id');
-    return $this->toast('success', 'Sikeres kijelentkezés.')->redirect('/admin/login');
+    return $this->alert('success', 'Sikeres kijelentkezés.', null, true)->redirect('/admin/login');
   }
 }

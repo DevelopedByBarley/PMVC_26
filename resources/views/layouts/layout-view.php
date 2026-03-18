@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="hu">
 
 <head>
     <meta charset="utf-8">
@@ -15,19 +15,44 @@
             }
         };
     </script>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+<body>
+
+    <!-- Toast notifications -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1090;">
         <?php require base_path('resources/views/components/toast.view.php'); ?>
     </div>
-    <main class="container py-5">
-        <section class="card shadow-sm border-0 t-rounded-2xl">
-            <?= $content ?? '' ?>
-        </section>
+
+    <!-- Navbar -->
+    <?php require base_path('resources/views/components/navbar.view.php'); ?>
+
+    <!-- Page content -->
+    <main>
+        <?= $content ?? '' ?>
     </main>
 
+    <!-- Footer -->
+    <?php require base_path('resources/views/components/footer.view.php'); ?>
 
+    <!-- Alert overlay -->
     <div class="alert-container position-fixed bottom-0 start-50 translate-middle-x p-3 tw-w-2/4" style="z-index: 1080;">
         <?php require base_path('resources/views/components/alert.view.php'); ?>
     </div>
@@ -35,9 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            if (!window.bootstrap || !window.bootstrap.Toast) {
-                return;
-            }
+            if (!window.bootstrap || !window.bootstrap.Toast) return;
             document.querySelectorAll('.toast').forEach(function(element) {
                 var toast = window.bootstrap.Toast.getOrCreateInstance(element);
                 toast.show();

@@ -1,11 +1,17 @@
 // Behúzzuk a külön modulból az induláshoz szükséges függvényeket.
 import { initUi, onReady } from './ui.js';
+import { validator } from './validator.js';
+import { cookie } from './cookie.js';
 
 // Egyszerű app objektum: itt van a belépési pont és az események kötése.
 const app = {
     boot() {
         // Alap UI inicializálás.
         initUi();
+        // Form validáció inicializálás.
+        validator();
+        // Cookie kezelés inicializálás.
+        cookie();
         // Globális event listener-ek regisztrálása.
         this.bindEvents();
     },

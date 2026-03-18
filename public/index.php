@@ -12,6 +12,7 @@ const BASE_PATH = __DIR__ . '/../';
 
 require BASE_PATH . 'vendor/autoload.php';
 require BASE_PATH . 'core/functions.php';
+app(); // boot: .env + database capsule + services
 Session::create();
 
 require BASE_PATH . 'routes/web.php';

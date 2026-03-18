@@ -56,13 +56,28 @@
                 </li>
             </ul>
 
+            <!-- Language switcher -->
+            <?php $currentLang = \Core\Language::get(); ?>
+            <div class="d-flex align-items-center gap-1 me-2">
+                <?php foreach (['hu' => '🇭🇺', 'en' => '🇬🇧'] as $code => $flag): ?>
+                    <a href="/lang/<?= $code ?>"
+                       title="<?= strtoupper($code) ?>"
+                       style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:8px; text-decoration:none; font-size:1.1rem; transition:all 0.2s;
+                              <?= $currentLang === $code ? 'background:rgba(14,165,233,0.12); box-shadow:0 0 0 2px rgba(14,165,233,0.4);' : 'opacity:0.5;' ?>"
+                       onmouseover="this.style.opacity='1'; this.style.background='rgba(14,165,233,0.08)';"
+                       onmouseout="this.style.opacity='<?= $currentLang === $code ? '1' : '0.5' ?>'; this.style.background='<?= $currentLang === $code ? 'rgba(14,165,233,0.12)' : 'transparent' ?>';">
+                        <?= $flag ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+
             <!-- Auth buttons -->
             <div class="d-flex align-items-center gap-2">
                 <?php if (checkAuth('user')): ?>
                     <span class="text-secondary small d-none d-lg-inline">
                         Üdv, <strong><?= htmlspecialchars($_SESSION['user']['name'] ?? 'Felhasználó', ENT_QUOTES, 'UTF-8') ?></strong>
                     </span>
-                    <form method="POST" action="/logout" class="m-0">
+                    <form method="POST" action="/user/logout" class="m-0">
                         <?php if (function_exists('csrf_field')) echo 'csrf'; ?>
                         <button type="submit" class="btn btn-sm"
                                 style="background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px 16px; font-weight: 500; transition: all 0.2s;">
@@ -70,12 +85,12 @@
                         </button>
                     </form>
                 <?php else: ?>
-                    <a href="/login"
+                    <a href="/user/login"
                        class="btn btn-sm"
                        style="background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px 18px; font-weight: 500; transition: all 0.2s; text-decoration: none;">
                         Bejelentkezés
                     </a>
-                    <a href="/register"
+                    <a href="/user/register"
                        class="btn btn-sm"
                        style="background: linear-gradient(135deg, #0ea5e9, #10b981); color: #fff; border: none; border-radius: 10px; padding: 6px 18px; font-weight: 600; transition: all 0.2s; text-decoration: none; box-shadow: 0 2px 8px rgba(14,165,233,0.3);">
                         Regisztráció

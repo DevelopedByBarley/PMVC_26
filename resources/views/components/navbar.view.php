@@ -1,12 +1,10 @@
-<nav class="navbar navbar-expand-lg tw-sticky tw-top-0 tw-z-50" id="mainNavbar"
-     style="background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.06); transition: all 0.3s ease;">
+<nav class="navbar navbar-expand-lg tw-sticky tw-top-0 tw-z-50 tw-bg-white/85 tw-backdrop-blur-[12px] tw-border-b tw-border-black/[0.06] tw-transition-all tw-duration-300"
+     id="mainNavbar">
     <div class="container">
 
         <!-- Brand -->
-        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="/"
-           style="font-size: 1.25rem; color: #0f172a; text-decoration: none;">
-            <span class="tw-inline-flex tw-items-center tw-justify-center tw-w-9 tw-h-9 tw-rounded-xl"
-                  style="background: linear-gradient(135deg, #0ea5e9, #10b981);">
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold tw-text-slate-900 tw-text-[1.25rem] tw-no-underline" href="/">
+            <span class="tw-inline-flex tw-items-center tw-justify-center tw-w-9 tw-h-9 tw-rounded-xl tw-bg-[linear-gradient(135deg,#0ea5e9,#10b981)]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 16 16">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
                              0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
@@ -18,7 +16,7 @@
                              0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
                 </svg>
             </span>
-            <span style="background: linear-gradient(135deg, #0f172a, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            <span class="tw-bg-[linear-gradient(135deg,#0f172a,#0ea5e9)] tw-bg-clip-text tw-text-transparent">
                 PMVC
             </span>
         </a>
@@ -34,23 +32,20 @@
         <div class="collapse navbar-collapse" id="mainNavbarCollapse">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium"
-                       href="/"
-                       style="color: #475569; transition: all 0.2s;">
+                    <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium tw-text-slate-500 tw-transition-all tw-duration-200 hover:tw-bg-slate-100 hover:tw-text-sky-500"
+                       href="/">
                         Főoldal
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium"
-                       href="/posts"
-                       style="color: #475569; transition: all 0.2s;">
+                    <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium tw-text-slate-500 tw-transition-all tw-duration-200 hover:tw-bg-slate-100 hover:tw-text-sky-500"
+                       href="/posts">
                         Bejegyzések
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium"
-                       href="/about"
-                       style="color: #475569; transition: all 0.2s;">
+                    <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium tw-text-slate-500 tw-transition-all tw-duration-200 hover:tw-bg-slate-100 hover:tw-text-sky-500"
+                       href="/about">
                         Névjegy
                     </a>
                 </li>
@@ -62,10 +57,7 @@
                 <?php foreach (['hu' => '🇭🇺', 'en' => '🇬🇧'] as $code => $flag): ?>
                     <a href="/lang/<?= $code ?>"
                        title="<?= strtoupper($code) ?>"
-                       style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:8px; text-decoration:none; font-size:1.1rem; transition:all 0.2s;
-                              <?= $currentLang === $code ? 'background:rgba(14,165,233,0.12); box-shadow:0 0 0 2px rgba(14,165,233,0.4);' : 'opacity:0.5;' ?>"
-                       onmouseover="this.style.opacity='1'; this.style.background='rgba(14,165,233,0.08)';"
-                       onmouseout="this.style.opacity='<?= $currentLang === $code ? '1' : '0.5' ?>'; this.style.background='<?= $currentLang === $code ? 'rgba(14,165,233,0.12)' : 'transparent' ?>';">
+                       class="tw-inline-flex tw-items-center tw-justify-center tw-w-[30px] tw-h-[30px] tw-rounded-[8px] tw-no-underline tw-text-[1.1rem] tw-transition-all tw-duration-200 hover:tw-opacity-100 hover:tw-bg-[rgba(14,165,233,0.08)] <?= $currentLang === $code ? 'tw-bg-[rgba(14,165,233,0.12)] tw-shadow-[0_0_0_2px_rgba(14,165,233,0.4)]' : 'tw-opacity-50' ?>">
                         <?= $flag ?>
                     </a>
                 <?php endforeach; ?>
@@ -79,20 +71,18 @@
                     </span>
                     <form method="POST" action="/user/logout" class="m-0">
                         <?php if (function_exists('csrf_field')) echo 'csrf'; ?>
-                        <button type="submit" class="btn btn-sm"
-                                style="background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px 16px; font-weight: 500; transition: all 0.2s;">
+                        <button type="submit"
+                                class="btn btn-sm tw-bg-slate-100 tw-text-slate-500 tw-border tw-border-slate-200 tw-rounded-[10px] tw-px-4 tw-py-[6px] fw-medium tw-transition-all tw-duration-200 hover:tw-bg-slate-200">
                             Kilépés
                         </button>
                     </form>
                 <?php else: ?>
                     <a href="/user/login"
-                       class="btn btn-sm"
-                       style="background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px 18px; font-weight: 500; transition: all 0.2s; text-decoration: none;">
+                       class="btn btn-sm tw-bg-slate-100 tw-text-slate-500 tw-border tw-border-slate-200 tw-rounded-[10px] tw-px-[18px] tw-py-[6px] fw-medium tw-transition-all tw-duration-200 hover:tw-bg-slate-200 tw-no-underline">
                         Bejelentkezés
                     </a>
                     <a href="/user/register"
-                       class="btn btn-sm"
-                       style="background: linear-gradient(135deg, #0ea5e9, #10b981); color: #fff; border: none; border-radius: 10px; padding: 6px 18px; font-weight: 600; transition: all 0.2s; text-decoration: none; box-shadow: 0 2px 8px rgba(14,165,233,0.3);">
+                       class="btn btn-sm tw-bg-[linear-gradient(135deg,#0ea5e9,#10b981)] tw-text-white tw-border-0 tw-rounded-[10px] tw-px-[18px] tw-py-[6px] fw-semibold tw-transition-all tw-duration-200 tw-shadow-[0_2px_8px_rgba(14,165,233,0.3)] hover:tw--translate-y-px hover:tw-shadow-[0_4px_12px_rgba(14,165,233,0.45)] tw-no-underline">
                         Regisztráció
                     </a>
                 <?php endif; ?>
@@ -101,35 +91,19 @@
     </div>
 </nav>
 
-<style>
-    #mainNavbar .nav-link:hover {
-        background: #f1f5f9;
-        color: #0ea5e9 !important;
-    }
-    #mainNavbar .nav-link.active {
-        background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(16,185,129,0.1));
-        color: #0ea5e9 !important;
-    }
-</style>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navbar = document.getElementById('mainNavbar');
+
         window.addEventListener('scroll', function () {
-            if (window.scrollY > 20) {
-                navbar.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
-                navbar.style.background = 'rgba(255,255,255,0.97)';
-            } else {
-                navbar.style.boxShadow = 'none';
-                navbar.style.background = 'rgba(255,255,255,0.85)';
-            }
+            navbar.classList.toggle('shadow-sm', window.scrollY > 20);
         });
 
-        // Active link highlight
         const currentPath = window.location.pathname;
         document.querySelectorAll('#mainNavbar .nav-link').forEach(function (link) {
             if (link.getAttribute('href') === currentPath) {
-                link.classList.add('active');
+                link.classList.add('tw-bg-[linear-gradient(135deg,rgba(14,165,233,0.1),rgba(16,185,129,0.1))]', 'tw-text-sky-500');
+                link.classList.remove('tw-text-slate-500');
             }
         });
     });

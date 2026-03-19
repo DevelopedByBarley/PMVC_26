@@ -18,69 +18,13 @@ $vs = $variantMap[$alert['variant'] ?? 'primary'] ?? $variantMap['primary'];
 ?>
 
 <?php if (($alert['message'] ?? '') !== '' || ($alert['heading'] ?? null) !== null): ?>
-<?php if (!defined('PMVC_ALERT_STYLES')): define('PMVC_ALERT_STYLES', true); ?>
-<style>
-    .pmvc-alert {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        border-radius: 14px;
-        border: none;
-        border-left: 4px solid var(--pmvc-alert-border);
-        background: var(--pmvc-alert-bg);
-        color: var(--pmvc-alert-text);
-        padding: 14px 16px;
-        box-shadow: 0 2px 12px rgba(0,0,0,.06);
-        margin: 0;
-    }
-    .pmvc-alert.alert-dismissible { padding-right: 16px; }
-    .pmvc-alert .pmvc-alert-icon {
-        display: flex;
-        align-items: center;
-        font-size: 1.15rem;
-        line-height: 1;
-        color: var(--pmvc-alert-icon);
-        flex-shrink: 0;
-        margin-top: 1px;
-    }
-    .pmvc-alert .pmvc-alert-content { flex: 1; min-width: 0; }
-    .pmvc-alert .pmvc-alert-heading {
-        font-size: .875rem;
-        font-weight: 600;
-        color: var(--pmvc-alert-text);
-        margin-bottom: 3px;
-        line-height: 1.4;
-    }
-    .pmvc-alert .pmvc-alert-message {
-        font-size: .875rem;
-        color: var(--pmvc-alert-text);
-        line-height: 1.55;
-        opacity: .9;
-    }
-    .pmvc-alert .btn-close {
-        width: 22px;
-        height: 22px;
-        background-size: 9px;
-        opacity: .45;
-        border-radius: 6px;
-        flex-shrink: 0;
-        margin: 0;
-        padding: 0;
-        position: static;
-        transition: opacity .15s, background-color .15s;
-    }
-    .pmvc-alert .btn-close:hover { opacity: .75; background-color: rgba(0,0,0,.07); }
-</style>
-<?php endif; ?>
-
 <div
     <?= ($alert['id'] ?? null) ? 'id="' . htmlspecialchars((string) $alert['id'], ENT_QUOTES, 'UTF-8') . '"' : '' ?>
-    class="pmvc-alert <?= htmlspecialchars((string) ($alert['class_attr'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
-    style="--pmvc-alert-bg:<?= $vs['bg'] ?>;--pmvc-alert-border:<?= $vs['border'] ?>;--pmvc-alert-text:<?= $vs['text'] ?>;--pmvc-alert-icon:<?= $vs['icon'] ?>;"
+    class="d-flex align-items-start gap-3 tw-rounded-[14px] tw-border-0 tw-border-l-4 tw-border-solid tw-border-l-[<?= $vs['border'] ?>] tw-bg-[<?= $vs['bg'] ?>] tw-text-[<?= $vs['text'] ?>] tw-p-[14px_16px] tw-shadow-[0_2px_12px_rgba(0,0,0,0.06)] tw-m-0 <?= htmlspecialchars((string) ($alert['class_attr'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
     <?php foreach ((array) ($alert['attrs'] ?? []) as $key => $value): ?><?php if ($value === null || $value === false): ?><?php continue; ?><?php endif; ?><?= ' ' . htmlspecialchars((string) $key, ENT_QUOTES, 'UTF-8') ?><?php if ($value !== true): ?>="<?= htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8') ?>"<?php endif; ?><?php endforeach; ?>
 >
     <?php if ($alert['icon'] ?? null): ?>
-        <span class="pmvc-alert-icon">
+        <span class="d-flex align-items-center tw-text-[1.15rem] tw-leading-none tw-shrink-0 tw-mt-px tw-text-[<?= $vs['icon'] ?>]">
             <?php if ($alert['icon_is_html'] ?? false): ?>
                 <?= $alert['icon'] ?>
             <?php else: ?>
@@ -89,17 +33,25 @@ $vs = $variantMap[$alert['variant'] ?? 'primary'] ?? $variantMap['primary'];
         </span>
     <?php endif; ?>
 
-    <div class="pmvc-alert-content">
+    <div class="tw-flex-1 tw-min-w-0">
         <?php if (($alert['heading'] ?? null) !== null): ?>
-            <div class="pmvc-alert-heading"><?= htmlspecialchars((string) $alert['heading'], ENT_QUOTES, 'UTF-8') ?></div>
+            <div class="tw-text-sm tw-font-semibold tw-text-[<?= $vs['text'] ?>] tw-mb-[3px] tw-leading-[1.4]">
+                <?= htmlspecialchars((string) $alert['heading'], ENT_QUOTES, 'UTF-8') ?>
+            </div>
         <?php endif; ?>
         <?php if (($alert['message'] ?? '') !== ''): ?>
-            <div class="pmvc-alert-message <?= ($alert['heading'] ?? null) === null ? 'fw-medium' : '' ?>"><?= htmlspecialchars((string) $alert['message'], ENT_QUOTES, 'UTF-8') ?></div>
+            <div class="tw-text-sm tw-text-[<?= $vs['text'] ?>] tw-leading-[1.55] tw-opacity-90 <?= ($alert['heading'] ?? null) === null ? 'fw-medium' : '' ?>">
+                <?= htmlspecialchars((string) $alert['message'], ENT_QUOTES, 'UTF-8') ?>
+            </div>
         <?php endif; ?>
     </div>
 
     <?php if ($alert['dismissible'] ?? false): ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Bezár"></button>
+        <button type="button"
+                class="btn-close tw-shrink-0 tw-opacity-[0.45] tw-rounded-[6px] tw-m-0 tw-p-0 tw-w-[22px] tw-h-[22px] tw-[background-size:9px] tw-[position:static] hover:tw-opacity-75 hover:tw-bg-black/[0.07]"
+                data-bs-dismiss="alert"
+                aria-label="Bezár">
+        </button>
     <?php endif; ?>
 </div>
 <?php endif; ?>

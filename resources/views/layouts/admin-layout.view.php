@@ -35,46 +35,37 @@
             --text-muted:#94a3b8;
             --border:    #334155;
         }
-        html, body {
-            height: 100%;
-        }
         body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
             background: var(--bg-body);
             color: var(--text-main);
-            transition: background 0.3s, color 0.3s;
-        }
-        main {
-            flex: 1 0 auto;
+            transition: background .3s, color .3s;
         }
         [data-theme="dark"] .card {
             background: var(--bg-card) !important;
             border-color: var(--border) !important;
         }
-        [data-theme="dark"] .table {
-            color: var(--text-main);
-        }
-        [data-theme="dark"] .table thead tr {
-            background: #263348 !important;
-        }
+        [data-theme="dark"] .table { color: var(--text-main); }
+        [data-theme="dark"] .table thead tr { background: #263348 !important; }
         [data-theme="dark"] .form-select,
         [data-theme="dark"] .form-control {
             background: #1e293b;
             color: var(--text-main);
             border-color: var(--border);
         }
-        [data-theme="dark"] .form-select option {
-            background: #1e293b;
+        [data-theme="dark"] .form-select option { background: #1e293b; }
+        .theme-option-selected {
+            border-color: #ef4444 !important;
+            background: rgba(239,68,68,.06) !important;
         }
+        .theme-option-selected svg  { fill: #ef4444 !important; }
+        .theme-option-selected span { color: #ef4444 !important; }
     </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- Toast notifications -->
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1090;">
+    <div class="toast-container position-fixed top-0 end-0 p-3 tw-z-[1090]">
         <?php require base_path('resources/views/components/toast.view.php'); ?>
     </div>
 
@@ -82,12 +73,12 @@
     <?php require base_path('resources/views/components/admin-navbar.view.php'); ?>
 
     <!-- Page content -->
-    <main>
+    <main class="flex-grow-1">
         <?= $content ?? '' ?>
     </main>
 
     <!-- Alert overlay -->
-    <div class="alert-container position-fixed bottom-0 start-50 translate-middle-x p-3 tw-w-2/4" style="z-index: 1080;">
+    <div class="alert-container position-fixed bottom-0 start-50 translate-middle-x p-3 tw-w-2/4 tw-z-[1080]">
         <?php require base_path('resources/views/components/alert.view.php'); ?>
     </div>
 

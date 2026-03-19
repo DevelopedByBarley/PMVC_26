@@ -40,7 +40,7 @@
                         Dashboard
                     </a>
                 </li>
-                <li class="nav-item">
+             <!--    <li class="nav-item">
                     <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium admin-nav-link"
                        href="/admin/users"
                        style="color: #94a3b8; font-size: 0.875rem; transition: all 0.2s;">
@@ -51,8 +51,8 @@
                         </svg>
                         Felhasználók
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+        <!--         <li class="nav-item">
                     <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium admin-nav-link"
                        href="/admin/posts"
                        style="color: #94a3b8; font-size: 0.875rem; transition: all 0.2s;">
@@ -61,7 +61,7 @@
                         </svg>
                         Bejegyzések
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link px-3 py-2 tw-rounded-lg fw-medium admin-nav-link"
                        href="/admin/settings"

@@ -6,6 +6,8 @@ require_once __DIR__ . '/Router.php';
 require_once __DIR__ . '/CSRF.php';
 require_once __DIR__ . '/../database/Connect.php';
 
+
+
 if (!function_exists('base_path')) {
     function base_path(string $path = ''): string
     {
@@ -176,6 +178,56 @@ if (!function_exists('errors')) {
                 . htmlspecialchars($message, ENT_QUOTES, 'UTF-8')
                 . '</div>';
         }
+    }
+}
+
+if (!function_exists('csrf')) {
+    function csrf(string $tokenId = 'default'): string
+    {
+        static $instance = null;
+        if ($instance === null) {
+            $instance = new \Core\CSRF();
+        }
+        $token = $instance->generateToken($tokenId);
+        return '<input type="hidden" name="_csrf_token" value="' . htmlspecialchars($token, ENT_QUOTES, 'UTF-8') . '">';
+    }
+}
+
+if (!function_exists('abort')) {
+    function abort(int $code): never
+    {
+        $viewFile = base_path("resources/views/pages/status/{$code}.php");
+
+        http_response_code($code);
+
+        if (is_file($viewFile)) {
+            $layoutFile = base_path('resources/views/layouts/layout-view.php');
+            $title = match ($code) {
+                403 => 'Hozzáférés megtagadva',
+                404 => 'Az oldal nem található',
+                default => (string) $code,
+            };
+            $content = (function () use ($viewFile) {
+                ob_start();
+                require $viewFile;
+                return ob_get_clean();
+            })();
+            require $layoutFile;
+        }
+
+        exit;
+    }
+}
+
+if (!function_exists('paginate')) {
+    function paginate(\Illuminate\Pagination\LengthAwarePaginator $paginator): void
+    {
+        $componentPath = base_path('resources/views/components/pagination.view.php');
+        (function () use ($paginator, $componentPath) {
+            ob_start();
+            require $componentPath;
+            echo ob_get_clean();
+        })();
     }
 }
 

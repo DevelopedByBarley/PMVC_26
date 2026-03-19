@@ -13,4 +13,21 @@ class CSRF
 {
     private CsrfTokenManager $manager;
 
+    public function __construct()
+    {
+        $this->manager = new CsrfTokenManager(
+            new UriSafeTokenGenerator(),
+            new NativeSessionTokenStorage()
+        );
+    }
+
+    public function generateToken(string $tokenId): string
+    {
+        return $this->manager->getToken($tokenId)->getValue();
+    }
+
+    public function validateToken(string $tokenId, string $tokenValue): bool
+    {
+        return $this->manager->isTokenValid(new CsrfToken($tokenId, $tokenValue));
+    }
 }

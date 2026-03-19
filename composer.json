@@ -15,6 +15,7 @@
         "illuminate/database": "^12.52",
         "symfony/security-csrf": "^7.4",
         "illuminate/validation": "^12.52",
-        "illuminate/translation": "^12.52"
+        "illuminate/translation": "^12.52",
+        "illuminate/pagination": "^12.55"
     }
 }

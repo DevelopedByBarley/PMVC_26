@@ -29,6 +29,8 @@ class AdminAuthController extends Controller
 
   public function login()
   {
+    $this->verifyCsrf('admin_login');
+
     $data = [
       'email' => trim($_POST['email'] ?? ''),
       'password' => trim($_POST['password'] ?? ''),

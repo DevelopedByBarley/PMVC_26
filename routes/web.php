@@ -14,6 +14,7 @@ $router->get('/lang/{lang}', [App\Http\Controllers\LanguageController::class, 's
 
 require __DIR__ . '/posts.php';
 require __DIR__ . '/admin/auth.php';
+require __DIR__ . '/admin/settings.php';
 require __DIR__ . '/admin/dashboard.php';
 
 require __DIR__ . '/user/auth.php';

@@ -15,6 +15,15 @@ use Illuminate\Validation\Factory;
 Dotenv::createImmutable(BASE_PATH)->safeLoad();
 \Database\Connect::boot();
 
+\Illuminate\Pagination\Paginator::currentPageResolver(function ($pageName = 'page') {
+    $page = $_GET[$pageName] ?? 1;
+    return (int) $page > 0 ? (int) $page : 1;
+});
+
+\Illuminate\Pagination\Paginator::currentPathResolver(function () {
+    return strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+});
+
 $logsDir = base_path('storage/logs');
 if (!is_dir($logsDir)) {
     mkdir($logsDir, 0777, true);

@@ -24,6 +24,7 @@
             style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
 
             <form method="POST" action="/user/register" class="d-flex flex-column gap-3">
+                <?= csrf('user_register') ?>
 
                 <!-- Name -->
                 <div>

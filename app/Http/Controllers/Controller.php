@@ -19,6 +19,18 @@ abstract class Controller
         $this->storage = new Storage();
     }
 
+    protected function verifyCsrf(string $tokenId = 'default'): void
+    {
+        static $csrf = null;
+        if ($csrf === null) {
+            $csrf = new \Core\CSRF();
+        }
+        $token = $_POST['_csrf_token'] ?? '';
+        if (!$csrf->validateToken($tokenId, $token)) {
+            abort(403);
+        }
+    }
+
     protected function json(array $data, int $status = 200, array $headers = []): JsonResponse
     {
         return new JsonResponse($data, $status, $headers);

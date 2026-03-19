@@ -1,5 +1,10 @@
+<?php
+    $adminId       = $_SESSION['admin_id'] ?? null;
+    $adminSettings = $adminId ? \App\Models\AdminSettings::where('admin_id', $adminId)->first() : null;
+    $theme         = $adminSettings->theme ?? 'light';
+?>
 <!doctype html>
-<html lang="hu">
+<html lang="hu" data-theme="<?= $theme ?>">
 
 <head>
     <meta charset="utf-8">
@@ -16,6 +21,20 @@
         };
     </script>
     <style>
+        :root {
+            --bg-body:   #f8fafc;
+            --bg-card:   #ffffff;
+            --text-main: #0f172a;
+            --text-muted:#64748b;
+            --border:    #e2e8f0;
+        }
+        [data-theme="dark"] {
+            --bg-body:   #0f172a;
+            --bg-card:   #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted:#94a3b8;
+            --border:    #334155;
+        }
         html, body {
             height: 100%;
         }
@@ -23,10 +42,31 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background: #f8fafc;
+            background: var(--bg-body);
+            color: var(--text-main);
+            transition: background 0.3s, color 0.3s;
         }
         main {
             flex: 1 0 auto;
+        }
+        [data-theme="dark"] .card {
+            background: var(--bg-card) !important;
+            border-color: var(--border) !important;
+        }
+        [data-theme="dark"] .table {
+            color: var(--text-main);
+        }
+        [data-theme="dark"] .table thead tr {
+            background: #263348 !important;
+        }
+        [data-theme="dark"] .form-select,
+        [data-theme="dark"] .form-control {
+            background: #1e293b;
+            color: var(--text-main);
+            border-color: var(--border);
+        }
+        [data-theme="dark"] .form-select option {
+            background: #1e293b;
         }
     </style>
 </head>

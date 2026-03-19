@@ -1,15 +1,15 @@
-<div style="min-height: 100vh; background: linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #0c4a6e 100%); display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; position: relative; overflow: hidden;">
+<div style="min-height: 100vh; background: linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #450a0a 100%); display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; position: relative; overflow: hidden;">
 
     <!-- Background decoration -->
-    <div style="position: absolute; top: -120px; right: -120px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%); pointer-events: none;"></div>
-    <div style="position: absolute; bottom: -150px; left: -80px; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(16,185,129,0.09) 0%, transparent 70%); pointer-events: none;"></div>
+    <div style="position: absolute; top: -120px; right: -120px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(239,68,68,0.12) 0%, transparent 70%); pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -150px; left: -80px; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(220,38,38,0.09) 0%, transparent 70%); pointer-events: none;"></div>
 
     <div class="w-100" style="max-width: 440px; position: relative; z-index: 1;">
 
         <!-- Logo / Brand -->
         <div class="text-center mb-4">
             <div class="d-inline-flex align-items-center justify-content-center tw-w-14 tw-h-14 tw-rounded-2xl mb-3"
-                 style="background: linear-gradient(135deg, #0ea5e9, #10b981); box-shadow: 0 8px 24px rgba(14,165,233,0.35);">
+                 style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 8px 24px rgba(239,68,68,0.35);">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" viewBox="0 0 16 16">
                     <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 9h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1z"/>
                 </svg>
@@ -23,6 +23,7 @@
              style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
 
             <form method="POST" action="/admin/login" class="d-flex flex-column gap-3">
+                <?= csrf('admin_login') ?>
 
                 <!-- Email -->
                 <div>
@@ -36,7 +37,7 @@
                            placeholder="admin@domain.hu"
                            required
                            style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; border-radius: 12px; padding: 0.65rem 1rem; transition: all 0.2s;"
-                           onfocus="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(14,165,233,0.5)'; this.style.boxShadow='0 0 0 3px rgba(14,165,233,0.12)';"
+                           onfocus="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(239,68,68,0.5)'; this.style.boxShadow='0 0 0 3px rgba(239,68,68,0.12)';"
                            onblur="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';">
                     <?php errors('email', $errors ?? []); ?>
                 </div>
@@ -53,7 +54,7 @@
                                placeholder="••••••••"
                                required
                                style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; border-radius: 12px; padding: 0.65rem 2.8rem 0.65rem 1rem; transition: all 0.2s;"
-                               onfocus="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(14,165,233,0.5)'; this.style.boxShadow='0 0 0 3px rgba(14,165,233,0.12)';"
+                               onfocus="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(239,68,68,0.5)'; this.style.boxShadow='0 0 0 3px rgba(239,68,68,0.12)';"
                                onblur="this.style.background='rgba(255,255,255,0.06)'; this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';">
                         <!-- Toggle visibility -->
                         <button type="button" id="togglePassword"
@@ -82,9 +83,9 @@
                     </div>
                     <a href="/admin/forgot-password"
                        class="small fw-semibold text-decoration-none"
-                       style="color: #38bdf8; transition: color 0.2s;"
-                       onmouseover="this.style.color='#7dd3fc';"
-                       onmouseout="this.style.color='#38bdf8';">
+                       style="color: #f87171; transition: color 0.2s;"
+                       onmouseover="this.style.color='#fca5a5';"
+                       onmouseout="this.style.color='#f87171';">
                         Elfelejtett jelszó?
                     </a>
                 </div>
@@ -92,9 +93,9 @@
                 <!-- Submit -->
                 <button type="submit"
                         class="btn fw-semibold w-100 mt-1"
-                        style="background: linear-gradient(135deg, #0ea5e9, #10b981); color: white; border: none; border-radius: 12px; padding: 0.75rem; font-size: 1rem; box-shadow: 0 4px 16px rgba(14,165,233,0.3); transition: all 0.2s;"
-                        onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(14,165,233,0.45)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(14,165,233,0.3)';">
+                        style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 12px; padding: 0.75rem; font-size: 1rem; box-shadow: 0 4px 16px rgba(239,68,68,0.3); transition: all 0.2s;"
+                        onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(239,68,68,0.45)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(239,68,68,0.3)';">
                     Belépés &rarr;
                 </button>
 
@@ -119,7 +120,6 @@
 </div>
 
 <style>
-    /* Override Bootstrap input placeholder color in dark inputs */
     #email::placeholder, #password::placeholder {
         color: #475569;
     }

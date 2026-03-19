@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\AdminSettingsSeeder;
 
 const BASE_PATH = __DIR__ . '/../';
 
@@ -13,8 +14,8 @@ require BASE_PATH . 'bootstrap/app.php';
 echo "Seeding started...\n";
 
 try {
-    $adminSeeder = new AdminSeeder();
-    $adminSeeder->run();
+    (new AdminSeeder())->run();
+    (new AdminSettingsSeeder())->run();
 
     echo "Seeding finished successfully.\n";
 } catch (\Throwable $e) {

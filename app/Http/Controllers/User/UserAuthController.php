@@ -24,6 +24,8 @@ class UserAuthController extends Controller
 
   public function login()
   {
+    $this->verifyCsrf('user_login');
+
     $data = [
       'email'    => trim($_POST['email'] ?? ''),
       'password' => trim($_POST['password'] ?? ''),
@@ -75,6 +77,8 @@ class UserAuthController extends Controller
 
   public function register()
   {
+    $this->verifyCsrf('user_register');
+
     $data = [
       'name'             => trim($_POST['name'] ?? ''),
       'email'            => trim($_POST['email'] ?? ''),

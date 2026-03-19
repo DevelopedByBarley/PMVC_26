@@ -9,7 +9,7 @@
         <!-- Brand -->
         <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-decoration-none" href="/admin/dashboard">
             <span class="d-inline-flex align-items-center justify-content-center tw-w-8 tw-h-8 tw-rounded-lg"
-                  style="background: linear-gradient(135deg, #0ea5e9, #10b981);">
+                  style="background: linear-gradient(135deg, #ef4444, #dc2626);">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="white" viewBox="0 0 16 16">
                     <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                 </svg>
@@ -82,7 +82,7 @@
                 <div class="d-none d-lg-flex align-items-center gap-2 px-3 py-2 tw-rounded-xl"
                      style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
                     <div class="d-flex align-items-center justify-content-center tw-w-7 tw-h-7 tw-rounded-lg"
-                         style="background: linear-gradient(135deg, #0ea5e9, #10b981);">
+                         style="background: linear-gradient(135deg, #ef4444, #dc2626);">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 16 16">
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                         </svg>
@@ -129,8 +129,8 @@
         color: #e2e8f0 !important;
     }
     .admin-nav-link.active {
-        background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(16,185,129,0.15)) !important;
-        color: #38bdf8 !important;
+        background: rgba(239,68,68,0.15) !important;
+        color: #f87171 !important;
     }
 </style>
 

@@ -14,11 +14,9 @@ class AdminSeeder
         db()::table('admins')->insert([
             [
                 'id' => "1",
-                'level' => 1,
                 'name' => 'Szaniszló Árpád',
                 'email' => 'arpadsz@max.hu',
                 'password' => password_hash('Csak1enter@', PASSWORD_DEFAULT),
-                'avatar' => 'shark',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],

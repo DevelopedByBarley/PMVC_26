@@ -21,9 +21,7 @@ class AdminController extends Controller
             'adminName'    => $admin?->name ?? 'Admin',
             'usersCount'   => User::count(),
             'adminsCount'  => Admin::count(),
-           // 'postsCount'   => Post::count(),
-            'recentUsers'  => User::latest()->limit(5)->get(),
-           // 'recentPosts'  => Post::latest()->limit(5)->get(),
+            'recentUsers'  => User::latest()->paginate(1),
         ], 'layouts.admin-layout');
     }
 }

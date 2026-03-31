@@ -15,11 +15,15 @@ abstract class Controller
 
     public function __construct()
     {
-        // You can put common logic for all controllers here, like middleware handling, etc.
         $this->storage = new Storage();
-    }
 
-    protected function verifyCsrf(string $tokenId = 'default'): void
+        $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
+        if (in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE'], true) && config('auth.csrf_enabled')) {
+            $this->verifyCsrf();
+        }
+    }
+    
+    private function verifyCsrf(string $tokenId = 'default'): void
     {
         static $csrf = null;
         if ($csrf === null) {

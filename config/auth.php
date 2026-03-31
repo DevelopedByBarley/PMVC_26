@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'csrf_enabled' => env('AUTH_CSRF_ENABLED', true),
     'guard' => env('AUTH_GUARD', 'web'),
     'session_key' => env('AUTH_SESSION_KEY', 'auth_user_id'),
     'remember_cookie' => env('AUTH_REMEMBER_COOKIE', 'remember_token'),

@@ -12,7 +12,7 @@ class AdminMiddleware
     public function handle($request, Closure $next): Response
     {
         // Példa: sessionből nézzük, admin-e
-        $isAdmin = isset($_SESSION['admin_id']) && $_SESSION['admin_id'] === 1;
+        $isAdmin = isset($_SESSION['admin_id']) ? (bool)$_SESSION['admin_id'] : false;
 
         if (!$isAdmin) {
             return new Response('Forbidden', 403);

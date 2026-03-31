@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat /Applications/XAMPP/xamppfiles/htdocs/PMVC_26/routes/admin/*.php)",
+      "Bash(cat /Applications/XAMPP/xamppfiles/htdocs/PMVC_26/routes/user/*.php)",
+      "Bash(grep -r \"$_ET\\\\|$_OST\\\\|$_EQUEST\" /Applications/XAMPP/xamppfiles/htdocs/PMVC_26/app --include=\"*.php\")"
+    ]
+  }
+}

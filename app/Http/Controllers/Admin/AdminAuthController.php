@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Core\Log;
+use Core\RateLimiter;
 use Core\Session;
 use Core\ValidationException;
 
@@ -29,7 +30,13 @@ class AdminAuthController extends Controller
 
   public function login()
   {
-    $this->verifyCsrf('admin_login');
+    $limiter = new RateLimiter(maxAttempts: 5, decaySeconds: 900);
+    $action  = 'admin-login';
+
+    if ($limiter->isBlocked($action)) {
+      $wait = ceil($limiter->availableIn($action) / 60);
+      return $this->toast('danger', "Túl sok sikertelen kísérlet. Próbáld újra {$wait} perc múlva.")->redirect('/admin/login');
+    }
 
     $data = [
       'email' => trim($_POST['email'] ?? ''),
@@ -47,14 +54,21 @@ class AdminAuthController extends Controller
           ['email' => $data['email']]
         );
       }
-      
+
       $admin = Admin::where('email', $data['email'])->first();
 
       if (!$admin || !password_verify($data['password'], $admin->password)) {
-        return $this->toast('danger', 'Invalid email or password.')->redirect('/admin/login');
+        $limiter->attempt($action);
+        $remaining = $limiter->remainingAttempts($action);
+        $msg = $remaining > 0
+          ? "Hibás email vagy jelszó. Még {$remaining} kísérlet maradt."
+          : 'Hibás email vagy jelszó. A fiók 15 percre zárolva.';
+        return $this->toast('danger', $msg)->redirect('/admin/login');
       }
 
-     // Regenerate session ID to prevent session fixation
+      $limiter->clear($action);
+
+      // Regenerate session ID to prevent session fixation
       session_regenerate_id(true);
       Session::put('admin_id', $admin->id);
 

@@ -70,7 +70,7 @@
                         Üdv, <strong><?= htmlspecialchars($_SESSION['user']['name'] ?? 'Felhasználó', ENT_QUOTES, 'UTF-8') ?></strong>
                     </span>
                     <form method="POST" action="/user/logout" class="m-0">
-                        <?php if (function_exists('csrf_field')) echo 'csrf'; ?>
+                        <?= csrf() ?>
                         <button type="submit"
                                 class="btn btn-sm tw-bg-slate-100 tw-text-slate-500 tw-border tw-border-slate-200 tw-rounded-[10px] tw-px-4 tw-py-[6px] fw-medium tw-transition-all tw-duration-200 hover:tw-bg-slate-200">
                             Kilépés

@@ -21,7 +21,7 @@
         <div class="tw-rounded-2xl p-4 p-md-5 tw-bg-white/[0.04] tw-border tw-border-white/[0.09] tw-backdrop-blur-[16px]">
 
             <form method="POST" action="/user/register" class="d-flex flex-column gap-3">
-                <?= csrf('user_register') ?>
+                <?= csrf() ?>
 
                 <!-- Name -->
                 <div>

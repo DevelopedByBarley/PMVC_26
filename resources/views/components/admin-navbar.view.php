@@ -105,6 +105,7 @@
 
                 <!-- Logout -->
                 <form method="POST" action="/admin/logout" class="m-0">
+                    <?= csrf() ?>
                     <button type="submit"
                             class="btn btn-sm fw-semibold d-flex align-items-center gap-2"
                             style="background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 7px 14px; transition: all 0.2s;"

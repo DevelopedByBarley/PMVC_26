@@ -6,6 +6,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Core\RateLimiter;
 use Core\Session;
 use Core\ValidationException;
 
@@ -24,7 +25,13 @@ class UserAuthController extends Controller
 
   public function login()
   {
-    $this->verifyCsrf('user_login');
+    $limiter = new RateLimiter(maxAttempts: 5, decaySeconds: 900);
+    $action  = 'user-login';
+
+    if ($limiter->isBlocked($action)) {
+      $wait = ceil($limiter->availableIn($action) / 60);
+      return $this->toast('danger', "Túl sok sikertelen kísérlet. Próbáld újra {$wait} perc múlva.")->redirect('/user/login');
+    }
 
     $data = [
       'email'    => trim($_POST['email'] ?? ''),
@@ -37,8 +44,6 @@ class UserAuthController extends Controller
         'password' => 'required|min:6|max:255',
       ]);
 
-
-
       if ($validator->fails()) {
         ValidationException::throw(
           $validator->errors()->toArray(),
@@ -48,10 +53,16 @@ class UserAuthController extends Controller
 
       $user = User::where('email', $data['email'])->first();
 
-      
       if (!$user || !password_verify($data['password'], $user->password)) {
-        return $this->toast('danger', 'Hibás email vagy jelszó.')->redirect('/user/login');
+        $limiter->attempt($action);
+        $remaining = $limiter->remainingAttempts($action);
+        $msg = $remaining > 0
+          ? "Hibás email vagy jelszó. Még {$remaining} kísérlet maradt."
+          : 'Hibás email vagy jelszó. A fiók 15 percre zárolva.';
+        return $this->toast('danger', $msg)->redirect('/user/login');
       }
+
+      $limiter->clear($action);
 
       session_regenerate_id(true);
       Session::put('user_id', $user->id);
@@ -77,8 +88,6 @@ class UserAuthController extends Controller
 
   public function register()
   {
-    $this->verifyCsrf('user_register');
-
     $data = [
       'name'             => trim($_POST['name'] ?? ''),
       'email'            => trim($_POST['email'] ?? ''),

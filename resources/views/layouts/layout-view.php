@@ -1,37 +1,43 @@
+<?php
+
+/**
+ * Publikus layout.
+ *
+ * A controller opcionálisan átadhatja:
+ *   'styles'  => ['/resources/css/valami.css']   – oldal specifikus stílus
+ *   'scripts' => ['/resources/js/valami.js']     – oldal specifikus szkript (defer)
+ */
+
+$lang = \Core\Language::current();
+?>
 <!doctype html>
-<html lang="hu">
+<html lang="<?= e($lang) ?>">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= htmlspecialchars($title ?? 'PMVC', ENT_QUOTES, 'UTF-8') ?></title>
+    <title><?= e($title ?? 'ZeroDay 2026') ?></title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             prefix: 'tw-',
-            corePlugins: {
-                preflight: false
-            }
+            corePlugins: { preflight: false }
         };
     </script>
-    <style>
-        html, body {
-            height: 100%;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-            background: #f8fafc;
-            min-height: 100vh;
-        }
-        main {
-            flex: 1 0 auto;
-        }
-        footer {
-            flex-shrink: 0;
-        }
-    </style>
+
+    <link rel="stylesheet" href="/resources/css/zeroday.css">
+    <link rel="stylesheet" href="/resources/css/toast.css">
+
+    <?php foreach (($styles ?? []) as $style): ?>
+        <link rel="stylesheet" href="<?= e($style) ?>">
+    <?php endforeach; ?>
 </head>
 
 <body>
@@ -41,15 +47,12 @@
         <?php require base_path('resources/views/components/toast.view.php'); ?>
     </div>
 
-    <!-- Navbar -->
     <?php require base_path('resources/views/components/navbar.view.php'); ?>
 
-    <!-- Page content -->
     <main>
         <?= $content ?? '' ?>
     </main>
 
-    <!-- Footer -->
     <?php require base_path('resources/views/components/footer.view.php'); ?>
 
     <!-- Alert overlay -->
@@ -58,15 +61,12 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!window.bootstrap || !window.bootstrap.Toast) return;
-            document.querySelectorAll('.toast').forEach(function(element) {
-                var toast = window.bootstrap.Toast.getOrCreateInstance(element);
-                toast.show();
-            });
-        });
-    </script>
+    <script src="/resources/js/navbar.js" defer></script>
+
+    <?php foreach (($scripts ?? []) as $script): ?>
+        <script src="<?= e($script) ?>" defer></script>
+    <?php endforeach; ?>
+
     <script type="module" src="/resources/js/main.js"></script>
 </body>
 

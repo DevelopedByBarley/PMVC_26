@@ -1,2 +1,6 @@
 vendor
 .env
+storage/logs
+storage/rate_limits
+storage/uploads
+.DS_Store

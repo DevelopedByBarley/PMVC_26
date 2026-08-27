@@ -86,7 +86,16 @@ class Router
 
     public function run(?Request $request = null): void
     {
-        $this->dispatch($request)->send();
+        try {
+            $this->dispatch($request)->send();
+        } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            // Nem létező útvonal: a status oldalt adjuk vissza fatal error helyett.
+            abort(404);
+        } catch (\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
+            abort(404);
+        } catch (\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException) {
+            abort(403);
+        }
     }
 
     public function getContainer(): Container

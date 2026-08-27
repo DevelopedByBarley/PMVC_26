@@ -4,79 +4,57 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Core\Log;
+use App\Models\Registration;
+use Core\Language;
 use Core\Session;
-use Core\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
 {
-
-    public function index()
+    public function index(): Response
     {
+        $lang = Language::current();
+        $t    = Language::load('home', $lang);
+
         return $this->view('pages.home', [
-            'title' => 'PMVC Home',
-            'heading' => 'Welcome Home',
-            'message' => 'This page is rendered from HomeController using view.php files and layouts folder.',
-            'errors' => Session::get('errors'),
-            'old' => Session::get('old'),
+            'title'    => $t['meta']['title'],
+            'lang'     => $lang,
+            't'        => $t,
+            'event'    => (array) config('event'),
+            'regTypes' => $this->registrationTypes($t),
+            'errors'   => (array) Session::get('errors', []),
+            'scripts'  => ['/resources/js/home.js'],
         ]);
     }
 
-    public function store()
+    /**
+     * A regisztrációs típusok a formhoz: felirat, nyitva van-e, elő van-e választva.
+     *
+     * @param array<string,mixed> $t
+     * @return list<array{value:string,label:string,open:bool,checked:bool}>
+     */
+    private function registrationTypes(array $t): array
     {
-        $data = [
-            'name' => trim($_POST['name'] ?? ''),
-            'email' => trim($_POST['email'] ?? ''),
-            'password' => trim($_POST['password'] ?? ''),
+        $labels = [
+            Registration::TYPE_ATTENDEE => $t['form']['attendee'],
+            Registration::TYPE_SPEAKER  => $t['form']['speaker'],
         ];
-        try {
-            $validator = validator()->make($data, [
-                'name' => 'required|min:3|max:100',
-                'email' => 'required|email|max:100|unique:users,email',
-                'password' => 'required|min:6|max:255',
-            ]);
 
-            if ($validator->fails()) {
-                ValidationException::throw(
-                    $validator->errors()->toArray(),
-                    ['name' => $data['name'], 'email' => $data['email']]
-                );
-            }
+        $types = [];
+        $selected = (string) oldValue('type');
 
-            $route = '/storage/uploads/images';
-            $fileName = $this->storage
-                ->setWhiteList(['image/jpeg', 'image/png', 'image/gif'])
-                ->file($_FILES['file'] ?? null)
-                ->deletePrevImages($route, ['2546526946996ecc0f14916.38738549.png']) // Itt megadhatod a törlendő képek nevét tömbben, pl: ['old_image1.jpg', 'old_image2.png']
-                ->save($route);
+        foreach ($labels as $value => $label) {
+            $open = (bool) config('registration.open.' . $value, true);
 
-
-            Log::info("New user created: {$data['email']} with uploaded file: {$fileName}");
-            User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => password_hash($data['password'], PASSWORD_DEFAULT),
-            ]);
-
-            Session::flash('success', 'Sikeres beküldés.');
-
-            return $this->toast('success', 'Sikeres beküldés.')->redirect('/');
-        } catch (ValidationException $e) {
-            Session::flash('errors', $e->errors);
-            Session::flash('old', $e->old);
-            return $this->alert('error', 'Hiba történt a beküldés során.')->response('', 302, ['Location' => '/']);
+            $types[] = [
+                'value'   => $value,
+                'label'   => $label,
+                'open'    => $open,
+                // Alapból egyik sincs bejelölve: a választás kötelező, de tudatos.
+                'checked' => $open && $selected === $value,
+            ];
         }
 
-
-
-
-        return $this->view('pages.home', [
-            'title' => 'PMVC Home',
-            'heading' => 'Welcome Home',
-            'message' => 'This page is rendered from HomeController using view.php files and layouts folder.',
-            'success' => 'Sikeres beküldés.',
-            'old' => $data,
-        ]);
+        return $types;
     }
 }

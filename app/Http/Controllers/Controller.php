@@ -13,16 +13,22 @@ abstract class Controller
 {
     protected  $storage;
 
+    /**
+     * A CSRF token azonosítója. Ha egy űrlap `csrf('valami')`-t használ,
+     * a controller ezt írja át ugyanarra az azonosítóra.
+     */
+    protected string $csrfTokenId = 'default';
+
     public function __construct()
     {
         $this->storage = new Storage();
 
         $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
         if (in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE'], true) && config('auth.csrf_enabled')) {
-            $this->verifyCsrf();
+            $this->verifyCsrf($this->csrfTokenId);
         }
     }
-    
+
     private function verifyCsrf(string $tokenId = 'default'): void
     {
         static $csrf = null;
@@ -62,7 +68,8 @@ abstract class Controller
         };
 
         Session::flash('toast', [
-            'title' => $title ?? ucfirst($type),
+            // Cím csak akkor, ha kapunk: a típus neve ("Danger") nem felirat.
+            'title' => $title,
             'message' => $message ?? 'Művelet végrehajtva.',
             'autohide' => true,
             'delay' => $delay,
@@ -76,20 +83,21 @@ abstract class Controller
 
     protected function alert(string $type = 'info', ?string $message = null, ?string $heading = null, bool $dismissible = false): self
     {
-        $tone = match ($type) {
-            'success' => 'alert-success',
-            'warning' => 'alert-warning',
-            'danger', 'error' => 'alert-danger',
-            'primary' => 'alert-primary',
-            'secondary' => 'alert-secondary',
-            default => 'alert-info',
+        // A komponens a 'variant' alapján színez (Core\Alert::resolve).
+        $variant = match ($type) {
+            'success' => 'success',
+            'warning' => 'warning',
+            'danger', 'error' => 'danger',
+            'primary' => 'primary',
+            'secondary' => 'secondary',
+            default => 'info',
         };
 
         Session::flash('alert', [
-            'heading' => $heading ?? ucfirst($type),
+            'variant' => $variant,
+            'heading' => $heading,
             'message' => $message ?? 'Művelet végrehajtva.',
             'dismissible' => $dismissible,
-            'class' => trim($tone . ($dismissible ? ' alert-dismissible fade show' : '')),
         ]);
 
         return $this;

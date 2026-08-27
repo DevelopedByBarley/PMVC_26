@@ -1,163 +1,129 @@
-<footer style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); color: #94a3b8; margin-top: auto;">
+<?php
 
-    <!-- Main footer content -->
-    <div class="container py-5">
-        <div class="row g-4">
+/**
+ * ZeroDay 2026 – publikus footer.
+ *   szövegek : resources/lang/{hu,en}/footer.php
+ *   stílus   : resources/css/zeroday.css
+ */
 
-            <!-- Brand column -->
-            <div class="col-lg-4 col-md-6">
-                <div class="d-flex align-items-center gap-2 mb-3">
-                    <span class="tw-inline-flex tw-items-center tw-justify-center tw-w-9 tw-h-9 tw-rounded-xl"
-                          style="background: linear-gradient(135deg, #0ea5e9, #10b981);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 16 16">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-                                     0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
-                                     -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
-                                     .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
-                                     -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
-                                     .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
-                                     .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
-                                     0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                        </svg>
+$foot = \Core\Language::load('footer');
+?>
+
+<footer class="zd-footer">
+    <div class="zd-shell">
+
+        <div class="zd-footer-grid">
+
+            <!-- Brand: a navbarral egyező mark + wordmark (élesebb, mint a kicsinyített lockup) -->
+            <div class="zd-footer-brand">
+                <a class="zd-footer-logo" href="/" aria-label="ZeroDay Cyber Conference 2026">
+                    <svg viewBox="116 20 36 39" role="img" aria-hidden="true" focusable="false">
+                        <g fill="#ffffff">
+                            <path d="M128.11,53.33c-6.01-1.74-10.41-7.28-10.41-13.85,0-4.48,2.05-8.49,5.25-11.13l-1.65-1.96c-3.8,3.13-6.22,7.86-6.22,13.16,0,7.97,5.48,14.65,12.88,16.51-.09-.36-.16-.74-.16-1.13,0-.57.12-1.1.3-1.6Z" />
+                            <path d="M149.16,39.55c0-2.76-.67-5.36-1.84-7.67-.6.63-1.37,1.09-2.25,1.29.93,1.91,1.47,4.05,1.47,6.32,0,6.43-4.21,11.87-10.02,13.73.22.53.34,1.11.34,1.71,0,.35-.05.68-.12,1.01,7.16-2.02,12.42-8.58,12.42-16.39Z" />
+                            <circle cx="135.91" cy="47.61" r="1.6" />
+                            <circle cx="144.04" cy="28.85" r="3.51" />
+                            <circle cx="132.42" cy="54.89" r="3.17" />
+                            <circle cx="130.87" cy="36.59" r="2.87" />
+                            <circle cx="132.29" cy="47.06" r=".7" />
+                            <rect x="131.7" y="32.94" width="11.06" height=".47" transform="translate(1.8 73.06) rotate(-30)" />
+                            <rect x="133.05" y="50.41" width="3.04" height=".26" transform="translate(27.07 145.97) rotate(-62.18)" />
+                            <rect x="137.35" y="49.06" width="4.29" height=".26" transform="translate(258.82 136.59) rotate(-163.21)" />
+                            <rect x="132.09" y="47.08" width="4.29" height=".26" transform="translate(260.65 112.55) rotate(-172.05)" />
+                        </g>
+                        <g fill="#24d0e9">
+                            <path d="M139.82,27.3c.29-.83.82-1.55,1.51-2.08-2.66-1.71-5.81-2.71-9.2-2.71-3.61,0-6.96,1.13-9.72,3.05l1.65,1.96c2.3-1.55,5.08-2.46,8.06-2.46,2.83,0,5.47.83,7.7,2.24Z" />
+                            <rect x="118.32" y="41.42" width="11.06" height=".34" transform="translate(.59 84.91) rotate(-37.93)" />
+                            <rect x="121.15" y="32.77" width="7.45" height=".35" transform="translate(206.63 132.91) rotate(-144.06)" />
+                            <rect x="132.55" y="39.1" width="14.66" height=".43" transform="translate(49.87 153.37) rotate(-67.42)" />
+                            <rect x="126.11" y="45.24" width="11.89" height=".43" transform="translate(98.67 181.06) rotate(-95.16)" />
+                            <circle cx="130.84" cy="36.59" r="1.87" />
+                            <circle cx="132.42" cy="54.8" r="1.87" />
+                            <circle cx="135.91" cy="47.61" r=".99" />
+                            <circle cx="144.04" cy="28.85" r="2.44" />
+                            <circle cx="132.3" cy="47.05" r=".45" />
+                        </g>
+                    </svg>
+                    <span>
+                        <strong>ZERO<span>DAY</span></strong>
+                        <small><?= e($foot['tagline']) ?></small>
                     </span>
-                    <span class="fw-bold fs-5" style="color: #f8fafc;">PMVC</span>
-                </div>
-                <p class="small lh-lg mb-4" style="color: #64748b;">
-                    Egy modern PHP MVC keretrendszer, ami egyszerűvé teszi a webalkalmazások fejlesztését.
-                    Tiszta kód, gyors fejlesztés, megbízható működés.
-                </p>
-                <!-- Social icons -->
-                <div class="d-flex gap-2">
-                    <a href="#" class="footer-social-link" aria-label="GitHub">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="footer-social-link" aria-label="Twitter">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="footer-social-link" aria-label="Email">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                        </svg>
-                    </a>
-                </div>
+                </a>
+                <p><?= e($foot['blurb']) ?></p>
             </div>
 
-            <!-- Navigation links -->
-            <div class="col-lg-2 col-md-3 col-6">
-                <h6 class="fw-semibold mb-3 text-uppercase tracking-wide" style="color: #e2e8f0; font-size: 0.75rem; letter-spacing: 0.1em;">
-                    Navigáció
-                </h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="/" class="footer-link">Főoldal</a></li>
-                    <li class="mb-2"><a href="/posts" class="footer-link">Bejegyzések</a></li>
-                    <li class="mb-2"><a href="/about" class="footer-link">Névjegy</a></li>
-                    <li class="mb-2"><a href="/contact" class="footer-link">Kapcsolat</a></li>
+            <!-- Oldalon belüli navigáció -->
+            <nav class="zd-footer-col" aria-label="<?= e($foot['navTitle']) ?>">
+                <h2><?= e($foot['navTitle']) ?></h2>
+                <ul>
+                    <?php foreach ($foot['nav'] as $item): ?>
+                        <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
+
+            <!-- Tudnivalók -->
+            <div class="zd-footer-col">
+                <h2><?= e($foot['infoTitle']) ?></h2>
+                <dl class="zd-footer-info">
+                    <?php foreach ($foot['info'] as $row): ?>
+                        <div>
+                            <dt><?= e($row['label']) ?></dt>
+                            <dd><?= e($row['value']) ?></dd>
+                        </div>
+                    <?php endforeach; ?>
+                </dl>
+            </div>
+
+            <!-- Kapcsolat -->
+            <div class="zd-footer-col">
+                <h2><?= e($foot['contactTitle']) ?></h2>
+                <ul class="zd-footer-contact">
+                    <li>
+                        <a href="mailto:<?= e($foot['email']) ?>">
+                            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                            </svg>
+                            <?= e($foot['email']) ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://zeroday.gde.hu" target="_blank" rel="noopener noreferrer">
+                            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078.234-.44.501-.822.797-1.145A6.99 6.99 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.991 6.991 0 0 1-.798-1.144 8.113 8.113 0 0 1-.481-1.078 8.938 8.938 0 0 0-1.198.49 6.99 6.99 0 0 0 2.477 1.732zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a6.99 6.99 0 0 0 2.477-1.732 8.926 8.926 0 0 0-1.198-.49 8.113 8.113 0 0 1-.481 1.078 6.991 6.991 0 0 1-.798 1.144zm.653-2.964c.247.92.4 1.938.435 3.008h2.49a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667zm1.033-3.348c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 7.5h-2.49a13.36 13.36 0 0 1-.436 3.008zM11.91 8.5H8.5v2.409c.81.03 1.577.13 2.282.287.143-.268.276-.56.395-.872z" />
+                            </svg>
+                            <?= e($foot['site']) ?>
+                        </a>
+                    </li>
+                </ul>
+
+                <h2 class="zd-footer-partners-title"><?= e($foot['partners']) ?></h2>
+                <ul class="zd-footer-partners">
+                    <li>ELTE</li>
+                    <li>GDE</li>
+                    <li>PTE</li>
                 </ul>
             </div>
+        </div>
 
-            <!-- Account links -->
-            <div class="col-lg-2 col-md-3 col-6">
-                <h6 class="fw-semibold mb-3 text-uppercase" style="color: #e2e8f0; font-size: 0.75rem; letter-spacing: 0.1em;">
-                    Fiók
-                </h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="/login" class="footer-link">Bejelentkezés</a></li>
-                    <li class="mb-2"><a href="/register" class="footer-link">Regisztráció</a></li>
-                    <li class="mb-2"><a href="/profile" class="footer-link">Profil</a></li>
-                    <li class="mb-2"><a href="/settings" class="footer-link">Beállítások</a></li>
-                </ul>
-            </div>
+        <!-- Alsó sáv -->
+        <div class="zd-footer-bar">
+            <p class="zd-footer-copy">
+                &copy; <?= date('Y') ?> ZeroDay Cyber Conference &middot; <?= e($foot['rights']) ?>
+            </p>
 
-            <!-- Newsletter / CTA -->
-            <div class="col-lg-4 col-md-12">
-                <h6 class="fw-semibold mb-3 text-uppercase" style="color: #e2e8f0; font-size: 0.75rem; letter-spacing: 0.1em;">
-                    Hírlevél
-                </h6>
-                <p class="small mb-3" style="color: #64748b;">
-                    Iratkozz fel és értesülj elsőként az újdonságokról!
-                </p>
-                <div class="input-group">
-                    <input type="email" class="form-control form-control-sm"
-                           placeholder="email@példa.hu"
-                           style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; border-radius: 10px 0 0 10px;"
-                           onfocus="this.style.background='rgba(255,255,255,0.1)'"
-                           onblur="this.style.background='rgba(255,255,255,0.06)'">
-                    <button class="btn btn-sm px-3"
-                            style="background: linear-gradient(135deg, #0ea5e9, #10b981); color: white; border: none; border-radius: 0 10px 10px 0; font-weight: 600; white-space: nowrap;">
-                        Feliratkozás
-                    </button>
-                </div>
-            </div>
+            <ul class="zd-footer-legal">
+                <?php foreach ($foot['legal'] as $item): ?>
+                    <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a></li>
+                <?php endforeach; ?>
+            </ul>
 
+            <a href="#zd-main" class="zd-footer-top">
+                <?= e($foot['top']) ?>
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                </svg>
+            </a>
         </div>
     </div>
-
-    <!-- Divider -->
-    <div style="border-top: 1px solid rgba(255,255,255,0.06);"></div>
-
-    <!-- Bottom bar -->
-    <div class="container py-3">
-        <div class="row align-items-center g-2">
-            <div class="col-md-6 text-center text-md-start">
-                <span class="small" style="color: #475569;">
-                    &copy; <?= date('Y') ?> PMVC. Minden jog fenntartva.
-                </span>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a href="/privacy" class="footer-link-small me-3">Adatvédelem</a>
-                <a href="/terms" class="footer-link-small me-3">Felhasználási feltételek</a>
-                <a href="/cookies" class="footer-link-small">Sütik</a>
-            </div>
-        </div>
-    </div>
-
 </footer>
-
-<style>
-    .footer-link {
-        color: #64748b;
-        text-decoration: none;
-        font-size: 0.875rem;
-        transition: color 0.2s;
-    }
-    .footer-link:hover {
-        color: #0ea5e9;
-    }
-    .footer-link-small {
-        color: #475569;
-        text-decoration: none;
-        font-size: 0.8rem;
-        transition: color 0.2s;
-    }
-    .footer-link-small:hover {
-        color: #0ea5e9;
-    }
-    .footer-social-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.08);
-        color: #64748b;
-        text-decoration: none;
-        transition: all 0.2s;
-    }
-    .footer-social-link:hover {
-        background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(16,185,129,0.2));
-        border-color: rgba(14,165,233,0.4);
-        color: #0ea5e9;
-        transform: translateY(-2px);
-    }
-</style>

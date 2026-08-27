@@ -8,6 +8,14 @@ require_once __DIR__ . '/../database/Connect.php';
 
 
 
+if (!function_exists('e')) {
+    /** HTML escape a view fájlokhoz. */
+    function e(?string $value): string
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+    }
+}
+
 if (!function_exists('base_path')) {
     function base_path(string $path = ''): string
     {

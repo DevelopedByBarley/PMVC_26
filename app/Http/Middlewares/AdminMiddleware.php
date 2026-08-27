@@ -5,17 +5,25 @@ declare(strict_types=1);
 namespace App\Http\Middlewares;
 
 use Closure;
+use Core\Session;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
 {
     public function handle($request, Closure $next): Response
     {
-        // Példa: sessionből nézzük, admin-e
-        $isAdmin = isset($_SESSION['admin_id']) ? (bool)$_SESSION['admin_id'] : false;
+        if (!checkAuth('admin')) {
+            Session::flash('toast', [
+                'title' => 'Belépés szükséges',
+                'message' => 'Az admin felülethez be kell jelentkezni.',
+                'class' => 'text-bg-warning border-0',
+                'header_class' => 'border-0',
+                'autohide' => true,
+                'delay' => 4000,
+                'show' => true,
+            ]);
 
-        if (!$isAdmin) {
-            return new Response('Forbidden', 403);
+            return new Response('', 302, ['Location' => '/admin/login']);
         }
 
         return $next($request);

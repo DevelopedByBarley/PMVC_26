@@ -23,9 +23,9 @@ header(
     "Content-Security-Policy: " .
     "default-src 'self'; " .
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdn.tailwindcss.com; " .
-    "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net; " .
+    "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; " .
     "img-src 'self' data:; " .
-    "font-src 'self' cdn.jsdelivr.net; " .
+    "font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; " .
     "connect-src 'self';"
 );
 

@@ -4,3 +4,9 @@ storage/logs
 storage/rate_limits
 storage/uploads
 .DS_Store
+.env.*
+!.env.example
+Thumbs.db
+
+# Blueprint generated activity state
+blueprint/.state/run.json

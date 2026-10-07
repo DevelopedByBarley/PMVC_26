@@ -18,11 +18,6 @@ $lang = \Core\Language::current();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($title ?? 'ZeroDay 2026') ?></title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,7 +27,6 @@ $lang = \Core\Language::current();
         };
     </script>
 
-    <link rel="stylesheet" href="/resources/css/zeroday.css">
     <link rel="stylesheet" href="/resources/css/toast.css">
 
     <?php foreach (($styles ?? []) as $style): ?>
@@ -49,7 +43,7 @@ $lang = \Core\Language::current();
 
     <?php require base_path('resources/views/components/navbar.view.php'); ?>
 
-    <main>
+    <main id="main">
         <?= $content ?? '' ?>
     </main>
 
@@ -61,7 +55,6 @@ $lang = \Core\Language::current();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/resources/js/navbar.js" defer></script>
 
     <?php foreach (($scripts ?? []) as $script): ?>
         <script src="<?= e($script) ?>" defer></script>

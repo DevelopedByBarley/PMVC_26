@@ -23,7 +23,6 @@ class HomeController extends Controller
             'event'    => (array) config('event'),
             'regTypes' => $this->registrationTypes($t),
             'errors'   => (array) Session::get('errors', []),
-            'scripts'  => ['/resources/js/home.js'],
         ]);
     }
 

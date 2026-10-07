@@ -87,10 +87,9 @@ config/
   registration.php                     nyitva/zárva, throttle, duplikáció-tiltás
 
 resources/
-  css/zeroday.css                      publikus oldal stílusa
   css/admin.css                        admin felület stílusa
   css/toast.css                        toast komponens
-  js/home.js, js/navbar.js, js/admin.js
+  js/admin.js
   lang/{hu,en}/home.php                landing szövegek
   lang/{hu,en}/navbar.php, footer.php  komponens szövegek
   lang/{hu,en}/registration.php        visszaigazoló oldal szövegei

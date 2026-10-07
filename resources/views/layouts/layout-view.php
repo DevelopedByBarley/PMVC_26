@@ -1,37 +1,37 @@
-<?php
-
-/**
- * Publikus layout.
- *
- * A controller opcionálisan átadhatja:
- *   'styles'  => ['/resources/css/valami.css']   – oldal specifikus stílus
- *   'scripts' => ['/resources/js/valami.js']     – oldal specifikus szkript (defer)
- */
-
-$lang = \Core\Language::current();
-?>
 <!doctype html>
-<html lang="<?= e($lang) ?>">
+<html lang="hu">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= e($title ?? 'ZeroDay 2026') ?></title>
-
+    <title><?= htmlspecialchars($title ?? 'PMVC', ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             prefix: 'tw-',
-            corePlugins: { preflight: false }
+            corePlugins: {
+                preflight: false
+            }
         };
     </script>
-
-    <link rel="stylesheet" href="/resources/css/toast.css">
-
-    <?php foreach (($styles ?? []) as $style): ?>
-        <link rel="stylesheet" href="<?= e($style) ?>">
-    <?php endforeach; ?>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,12 +41,15 @@ $lang = \Core\Language::current();
         <?php require base_path('resources/views/components/toast.view.php'); ?>
     </div>
 
+    <!-- Navbar -->
     <?php require base_path('resources/views/components/navbar.view.php'); ?>
 
-    <main id="main">
+    <!-- Page content -->
+    <main>
         <?= $content ?? '' ?>
     </main>
 
+    <!-- Footer -->
     <?php require base_path('resources/views/components/footer.view.php'); ?>
 
     <!-- Alert overlay -->
@@ -55,11 +58,15 @@ $lang = \Core\Language::current();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-    <?php foreach (($scripts ?? []) as $script): ?>
-        <script src="<?= e($script) ?>" defer></script>
-    <?php endforeach; ?>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.bootstrap || !window.bootstrap.Toast) return;
+            document.querySelectorAll('.toast').forEach(function(element) {
+                var toast = window.bootstrap.Toast.getOrCreateInstance(element);
+                toast.show();
+            });
+        });
+    </script>
     <script type="module" src="/resources/js/main.js"></script>
 </body>
 

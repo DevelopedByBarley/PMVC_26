@@ -36,13 +36,13 @@ Minta: `.env.example`
 Globális helper:
 
 ```php
-db()::table('registrations')->get();
+db()::table('posts')->get();
 ```
 
 Példa query:
 
 ```php
-$registration = db()::table('registrations')->where('id', 1)->first();
+$post = db()::table('posts')->where('id', 1)->first();
 ```
 
 ## 4. Migrációk
@@ -83,8 +83,8 @@ Seeder futtató:
 
 Seeder osztályok:
 
+- `database/seeders/PostSeeder.php`
 - `database/seeders/AdminSeeder.php`
-- `database/seeders/AdminSettingsSeeder.php`
 
 Futtatás:
 
@@ -134,18 +134,3 @@ return new class implements Migration
 Hozz létre egy osztályt a `database/seeders` mappában, pl. `ExampleSeeder.php`,
 majd add hozzá a `database/DatabaseSeeder.php` fájlhoz.
 
-## 8. Táblák
-
-| tábla | leírás |
-| --- | --- |
-| `migrations` | lefutott migrációk |
-| `admins` | admin felhasználók |
-| `admin_settings` | admin megjelenési beállítások (téma, nyelv, időzóna) |
-| `registrations` | konferencia jelentkezések |
-| `registration_events` | jelentkezések idővonala (elfogadás, elutasítás, megjegyzés) |
-
-A regisztrációs táblák részletes leírása: [REGISTRATION.md](REGISTRATION.md).
-
-> Megjegyzés: a `zeroday` adatbázisban lehetnek más projektből maradt táblák is
-> (`school_metrics`, `category_rules`) – ezekhez ebben a projektben nincs
-> migráció, és a kód sem használja őket.

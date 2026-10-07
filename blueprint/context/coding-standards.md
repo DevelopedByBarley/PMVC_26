@@ -36,8 +36,8 @@
   them in `layouts.layout-view` unless another layout (or `null`) is passed
 - Escape every dynamic value with `e()`; never echo raw user input
 - Styling: Bootstrap 5 from CDN, plus Tailwind CDN with the `tw-` prefix and
-  preflight disabled. Page CSS and JS go in `resources/css/` and `resources/js/`
-  and are passed to the layout as `styles` / `scripts`
+  preflight disabled. Both layouts load `resources/js/main.js` as an ES module;
+  extra JS goes in `resources/js/` and extra CSS in `resources/css/`
 - No build step and no bundler. Any new external script or style must also be
   allowed by the Content-Security-Policy in `public/index.php`
 
@@ -66,7 +66,7 @@
 - Validate request input with `validator()` (Illuminate Validation) and throw
   `Core\ValidationException` so the form shows `errors()` and `old()` values
 - Every state-changing form posts `csrf()`; the base controller checks it for
-  POST/PUT/PATCH/DELETE. Use a named token (`$csrfTokenId`) when a form uses one
+  POST/PUT/PATCH/DELETE
 - Rate-limit public write endpoints with `Core\RateLimiter`
 - Report outcomes to the user through `$this->toast()` or `$this->alert()`
   (flashed via `Core\Session`); log unexpected failures with `Core\Log`
@@ -79,7 +79,7 @@
 - Classes: PascalCase, one class per file, file named after the class
 - Methods and variables: camelCase
 - Constants: SCREAMING_SNAKE_CASE
-- Views and assets: kebab-case (`admin-navbar.view.php`, `admin.css`)
+- Views and assets: kebab-case (`admin-navbar.view.php`, `validator.js`)
 - Database tables and columns: snake_case, plural table names
 
 ## Language of code and docs

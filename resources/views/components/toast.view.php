@@ -5,6 +5,44 @@ $toast = \Core\Toast::resolve($config ?? null);
 ?>
 
 <?php if (($toast['message'] ?? '') !== '' || ($toast['title'] ?? null) !== null): ?>
+<?php if (!defined('PMVC_TOAST_STYLES')): define('PMVC_TOAST_STYLES', true); ?>
+<style>
+    @keyframes pmvc-toast-progress {
+        from { transform: scaleX(1); }
+        to   { transform: scaleX(0); }
+    }
+    .pmvc-toast-wrap.toast {
+        border: none !important;
+        background: #ffffff !important;
+        border-radius: 16px !important;
+        overflow: hidden;
+        min-width: 300px;
+        max-width: 380px;
+        box-shadow: 0 10px 40px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06) !important;
+    }
+    .pmvc-toast-wrap .toast-header {
+        background: #ffffff !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        padding: 12px 14px 11px !important;
+        gap: 8px;
+    }
+    .pmvc-toast-wrap .toast-header strong { font-size:.85rem; font-weight:600; color:#0f172a; letter-spacing:-.01em; }
+    .pmvc-toast-wrap .toast-header small  { font-size:.75rem; color:#94a3b8; font-weight:400; }
+    .pmvc-toast-wrap .toast-header .btn-close { width:22px; height:22px; background-size:9px; opacity:.4; border-radius:6px; margin:0; padding:0; flex-shrink:0; transition:opacity .15s,background-color .15s; }
+    .pmvc-toast-wrap .toast-header .btn-close:hover { opacity:.7; background-color:#f1f5f9; }
+    .pmvc-toast-wrap .pmvc-toast-body { padding:12px 14px 14px; font-size:.875rem; color:#334155; line-height:1.55; display:flex; align-items:flex-start; gap:10px; }
+    .pmvc-toast-wrap .pmvc-toast-body .btn-close { width:20px; height:20px; background-size:9px; opacity:.35; border-radius:6px; flex-shrink:0; margin:1px -2px 0 4px; padding:0; transition:opacity .15s,background-color .15s; }
+    .pmvc-toast-wrap .pmvc-toast-body .btn-close:hover { opacity:.65; background-color:#f1f5f9; }
+    .pmvc-toast-progress {
+        height:3px;
+        background:linear-gradient(90deg,#6366f1 0%,#8b5cf6 50%,#ec4899 100%);
+        transform-origin:left center;
+        animation:pmvc-toast-progress var(--pmvc-delay,5s) linear forwards;
+        animation-play-state:paused;
+    }
+    .pmvc-toast-progress.is-running { animation-play-state:running; }
+</style>
+<?php endif; ?>
 
 <?php $hasHeader = ($toast['title'] ?? null) !== null || ($toast['timestamp'] ?? null) !== null; ?>
 

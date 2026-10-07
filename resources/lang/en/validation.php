@@ -12,25 +12,9 @@ return [
     'in' => 'The selected :attribute is invalid.',
     'accepted' => 'The :attribute must be accepted.',
     'boolean' => 'The :attribute field must be true or false.',
-    'unique' => 'The :attribute has already been taken.',
-    // For choice fields the generic "field is required" is misleading.
-    'custom' => [
-        'type' => [
-            'required' => 'Please select a registration type.',
-        ],
-        'mode' => [
-            'required' => 'Please select a participation mode.',
-        ],
-    ],
     'attributes' => [
         'name' => 'name',
         'email' => 'email address',
-        'type' => 'registration type',
-        'company' => 'company / university',
-        'phone' => 'phone number',
-        'mode' => 'participation mode',
-        'gdpr' => 'privacy notice',
-        'reason' => 'reason',
-        'note' => 'note',
     ],
+    'unique' => 'The :attribute has already been taken.',
 ];
